@@ -1,0 +1,64 @@
+{
+  "name": "twisker-slate-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@convertkit/slate-htm": "0.0.3",
+    "@convertkit/slate-keymap": "^0.1.8",
+    "@convertkit/slate-lists": "^0.2.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.5",
+    "@reach/visually-hidden": "^0.1.4",
+    "@slate-editor/alignment-plugin": "^5.1.0",
+    "@slate-editor/bold-plugin": "^5.1.0",
+    "@slate-editor/color-plugin": "^5.1.0",
+    "@slate-editor/embed-plugin": "^5.1.0",
+    "@slate-editor/font-family-plugin": "^5.1.0",
+    "@slate-editor/font-size-plugin": "^5.1.0",
+    "@slate-editor/grid-plugin": "^5.1.0",
+    "@slate-editor/image-plugin": "^5.1.1",
+    "@slate-editor/italic-plugin": "^5.1.0",
+    "@slate-editor/link-plugin": "^5.1.0",
+    "@slate-editor/list-plugin": "^5.1.0",
+    "@slate-editor/state-logger": "^5.1.0",
+    "@slate-editor/strikethrough-plugin": "^5.1.0",
+    "@slate-editor/toggle-readonly": "^5.1.0",
+    "@slate-editor/underline-plugin": "^5.1.0",
+    "axios": "^0.19.0",
+    "emotion": "^10.0.17",
+    "image-extensions": "^1.1.0",
+    "immutable": "^4.0.0-rc.12",
+    "is-hotkey": "^0.1.6",
+    "is-url": "^1.2.4",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "slate": "^0.47.8",
+    "slate-editor": "^5.1.1",
+    "slate-hyperscript": "^0.13.8",
+    "slate-react": "^0.22.9"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
