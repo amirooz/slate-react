@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Editor, getEventTransfer } from 'slate-react'
 import { Block, Value } from 'slate'
-import InitialValue from './InitialContent'
+import InitialValue from './InitialValue'
 import imageExtensions from 'image-extensions'
 import isUrl from 'is-url'
 import { css } from 'emotion'
@@ -53,8 +53,46 @@ class Dashboard extends Component {
         return value.blocks.some(node => node.type === type)
     }
 
+    wrapLink = (editor, href) => {
+        editor.wrapInline({
+          type: 'link',
+          data: { href },
+        })
+      
+        editor.moveToEnd()
+    }
+
+    unwrapLink = (editor) => {
+        editor.unwrapInline('link')
+    }
+
+    hasLinks = () => {
+        const { value } = this.state
+        return value.inlines.some(inline => inline.type === 'link')
+    }
+
     ref = (editor) => {
         this.editor = editor
+    }
+
+    renderInline = (props, editor, next) => {
+        const { attributes, children, node } = props
+    
+        switch (node.type) {
+            case 'link': {
+                const { data } = node
+                const href = data.get('href')
+                return (
+                <a {...attributes} href={href}>
+                    {children}
+                </a>
+                )
+            }
+        
+            default: {
+                return next()
+            }
+        }
     }
 
     renderMarkButton = (type, icon) => {
@@ -201,6 +239,43 @@ class Dashboard extends Component {
         this.editor.toggleMark(type)
     }
 
+    onClickLink = event => {
+        event.preventDefault()
+    
+        const { editor } = this
+        const { value } = editor
+        const hasLinks = this.hasLinks()
+    
+        if (hasLinks) {
+            editor.command(this.unwrapLink)
+        } else if (value.selection.isExpanded) {
+            const href = window.prompt('Enter the URL of the link:')
+        
+            if (href == null) {
+                return
+            }
+        
+            editor.command(this.wrapLink, href)
+        } else {
+            const href = window.prompt('Enter the URL of the link:')
+        
+            if (href == null) {
+                return
+            }
+        
+            const text = window.prompt('Enter the text for the link:')
+        
+            if (text == null) {
+                return
+            }
+    
+            editor
+                .insertText(text)
+                .moveFocusBackward(text.length)
+                .command(this.wrapLink, href)
+        }
+    }
+
     onClickBlock = (event, type) => {
         event.preventDefault()
 
@@ -274,9 +349,19 @@ class Dashboard extends Component {
     onDropOrPaste = (event, editor, next) => {
         const target = editor.findEventRange(event)
         if (!target && event.type === 'drop') return next()
+        if (editor.value.selection.isCollapsed) return next()
 
         const transfer = getEventTransfer(event)
         const { type, text, files } = transfer
+
+        if (type !== 'text' && type !== 'html') return next()
+        if (!isUrl(text)) return next()
+
+        if (this.hasLinks()) {
+        editor.command(this.unwrapLink)
+        }
+
+        editor.command(this.wrapLink, text)
 
         if (type === 'files') {
             // eslint-disable-next-line
@@ -300,7 +385,6 @@ class Dashboard extends Component {
             editor.command(this.insertImage, text, target)
             return
         }
-
         next()
     }
 
@@ -366,6 +450,9 @@ class Dashboard extends Component {
                         {this.renderBlockButton('heading-one', 'looks_one')}
                         {this.renderBlockButton('heading-two', 'looks_two')}
                         {this.renderBlockButton('block-quote', 'format_quote')}
+                        <Button active={this.hasLinks()} onMouseDown={this.onClickLink}>
+                            <Icon>link</Icon>
+                        </Button> 
                         <Button onMouseDown={this.toggleUnorderedList}>
                             <Icon>format_list_bulleted</Icon>
                         </Button>
@@ -408,6 +495,7 @@ class Dashboard extends Component {
                         onPaste={this.onDropOrPaste}
                         renderMark={this.renderMark}
                         renderBlock={this.renderBlock}
+                        renderInline={this.renderInline}
                     />
                 </div>
             </div>
