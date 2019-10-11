@@ -5,6 +5,7 @@ import "./index.css";
 
 const TestEditor = React.forwardRef(
   ({ plugins, initialValue, ...props }, ref) => {
+    // eslint-disable-next-line
     const memoPlugins = useMemo(() => plugins);
     const [value, setValue] = useState(() => Value.fromJSON(initialValue));
 

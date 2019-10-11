@@ -28,7 +28,7 @@ class SimpleReactFileUpload extends React.Component {
     formData.append('file',file)
     const config = {
         headers: {
-            'Access-Control-Allow-Origin': 'https://al-ed.com/twisker/upload/',
+            'Access-Control-Allow-Origin': 'https://twisker-slate.herokuapp.com',
             'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
             'Access-Control-Allow-Credentials': 'true',
             'content-type': 'multipart/form-data'
