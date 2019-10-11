@@ -16,14 +16,17 @@ $ git clone https://github.com/amirphp7/slate-react.git
 ```
 $ cd slate-react
 ```
-### Unix / Linux
+### Unix / Linux - YARN
+```
+$ remove package-lock.json
+```
 ```
 $ yarn install
 ```
 ```
 $ yarn start
 ```
-### Windows
+### Windows - NPM
 ```
 $ npm install
 ```
