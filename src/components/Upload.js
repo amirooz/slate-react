@@ -23,7 +23,7 @@ class SimpleReactFileUpload extends React.Component {
     this.setState({file:e.target.files[0]})
   }
   fileUpload(file){
-    const url = 'https://al-ed.com/twisker/upload/';
+    const url = '../assets/';
     const formData = new FormData();
     formData.append('file',file)
     const config = {
