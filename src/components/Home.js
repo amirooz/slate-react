@@ -54,6 +54,7 @@ class Home extends Component {
   render() {
     return (
       <div className="container page--home">
+        
         <SlateEditor plugins={plugins}>
           <SlateToolbar>
             <BoldButton className={classNames.button} />
@@ -65,7 +66,7 @@ class Home extends Component {
             <ListButtonBar className={classNames.button} />
             <ImageButton className={classNames.button} 
               signingUrl={
-                'https://al-ed.com/twisker/upload/'
+                window.location.origin + '/assets'
               }
             />
             <ColorButton
