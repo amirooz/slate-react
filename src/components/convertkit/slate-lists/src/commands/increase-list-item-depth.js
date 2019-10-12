@@ -24,7 +24,7 @@ export default ({ blocks }, editor) => {
   } else {
     const newList = Block.create({
       object: "block",
-      type: list.type
+      type: list.type,
     });
 
     editor.withoutNormalizing(() => {

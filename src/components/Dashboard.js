@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import { Editor, getEventTransfer } from 'slate-react'
 import { Block, Value } from 'slate'
-import InitialValue from './InitialValue'
+import InitialValue from './editor/InitialValue'
 import imageExtensions from 'image-extensions'
 import isUrl from 'is-url'
 import { css } from 'emotion'
 import { isKeyHotkey } from 'is-hotkey'
-import { Button, Icon, Toolbar } from './Components'
+import { Button, Icon, Toolbar } from './editor/Components'
+import NodeCount from './editor/NodeCount'
 
 const DEFAULT_NODE = 'paragraph'
 const isBoldHotkey = isKeyHotkey('mod+b')
 const isItalicHotkey = isKeyHotkey('mod+i')
 const isUnderlinedHotkey = isKeyHotkey('mod+u')
 const isCodeHotkey = isKeyHotkey('mod+`')
+const nodeRange = 10
 const plugins = [
-    // Lists() 
+    NodeCount()
 ]
 const schema = {
     document: {
@@ -204,14 +206,21 @@ class Dashboard extends Component {
     }
 
     saveDataLocalStorage = ({ value }) => {
+        const node = document.getElementById('nodeCount').innerText
         const content = JSON.stringify(this.state.value.toJSON())
-        localStorage.setItem('content', content)
+        if( node <= nodeRange ) {
+            localStorage.setItem('content', content)
+            alert('Save data local storage')
+        } else {
+            alert('Exceed node limit! Node limit is 10')
+        }
         this.setState({ })
     }
 
     discardChange = () => {
         const existingValue = JSON.parse(localStorage.getItem('content'))
         const value = Value.fromJSON(existingValue || InitialValue )
+        
         this.setState({ value })
     }
 
@@ -453,7 +462,7 @@ class Dashboard extends Component {
                         <Button active={this.hasLinks()} onMouseDown={this.onClickLink}>
                             <Icon>link</Icon>
                         </Button> 
-                        <Button onMouseDown={this.toggleUnorderedList}>
+                        {/* <Button onMouseDown={this.toggleUnorderedList}>
                             <Icon>format_list_bulleted</Icon>
                         </Button>
                         <Button onMouseDown={this.toggleOrderedList} >
@@ -464,7 +473,7 @@ class Dashboard extends Component {
                         </Button>
                         <Button onMouseDown={this.outdent} >
                             <Icon>format_indent_decrease</Icon>
-                        </Button>
+                        </Button> */}
                         <Button onMouseDown={this.onClickImage} title="Upload image from url">
                             <Icon>image</Icon>
                         </Button>
@@ -477,10 +486,11 @@ class Dashboard extends Component {
                         <Button onMouseDown={this.onClickBrowseFile} title="Upload file from file browser">
                             <Icon>file_upload</Icon>
                         </Button>
-                        <Button className="waves-effect waves-light btn-small save blue darken-2 right" onClick={this.saveDataLocalStorage}>Save</Button>
-                        <Button className="waves-effect waves-light btn-small cancel grey white-text right" onClick={this.discardChange}>Cancel</Button>
+                        <Button className="save blue right" onClick={this.saveDataLocalStorage}>Save</Button>
+                        <Button className="cancel grey right" onClick={this.discardChange}>Cancel</Button>
                     </Toolbar>
-                    <Editor
+                    <Editor 
+                        className="editor-body"
                         spellCheck
                         autoFocus
                         placeholder="Enter some rich text..."

@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 import Editor from "../../shared/test-editor";
-// import {
-//   OrderedList,
-//   UnorderedList,
-//   Indent,
-//   Outdent
-// } from "../../shared/test-editor/icons";
+import {
+  OrderedList,
+  UnorderedList,
+  Indent,
+  Outdent
+} from "../../shared/test-editor/icons";
 // import Button from "../../shared/test-editor/button";
 import Lists from "../src";
 import value from "./test-value";
-import { Button, Icon, Toolbar } from "../../../Components";
+import { Button, Toolbar } from "../../../editor/Components";
 
 const plugins = [Lists()];
 
@@ -18,7 +18,7 @@ const TestEditor = () => {
 
   const toggleUnorderedList = event => {
     event.preventDefault();
-    editor.current.toggleList({ type: "unordered-list" });
+    editor.current.toggleList();
   };
 
   const toggleOrderedList = event => {
@@ -37,25 +37,23 @@ const TestEditor = () => {
   };
 
   return (
-    <div> 
-        <div className="container">
-            <div className="dashboard">
-                <Toolbar>
-                    <Button onMouseDown={toggleUnorderedList}>
-                      <Icon>format_list_bulleted</Icon>
-                    </Button>
-                    <Button onMouseDown={toggleOrderedList}>
-                      <Icon>format_list_numbered</Icon>
-                    </Button>
-                    <Button onMouseDown={indent}>
-                      <Icon>format_indent_increase</Icon>
-                    </Button>
-                    <Button onMouseDown={outdent}>
-                      <Icon>format_indent_decrease</Icon>
-                    </Button>
-                    </Toolbar>
-                <Editor ref={editor} plugins={plugins} initialValue={value} />
-            </div>
+    <div className="container">
+        <div className="dashboard">
+            <Toolbar>
+              <Button onMouseDown={toggleUnorderedList} >
+                <UnorderedList />
+              </Button>
+              <Button onMouseDown={toggleOrderedList} >
+                <OrderedList />
+              </Button>
+              <Button onMouseDown={indent} >
+                <Indent />
+              </Button>
+              <Button onMouseDown={outdent} >
+                <Outdent />
+              </Button>
+            </Toolbar>
+            <Editor ref={editor} plugins={plugins} initialValue={value} />
         </div>
     </div>
   );
