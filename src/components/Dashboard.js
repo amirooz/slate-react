@@ -208,13 +208,14 @@ class Dashboard extends Component {
 
     saveDataLocalStorage = ({ value }) => {
         const node = document.getElementById('nodeCount').innerText
-        const nodeLimit = document.getElementById('nodeLimit').innerText
+        const nodeLimit = parseInt(document.getElementById('nodeLimit').innerText)
+        console.log(nodeLimit)
         const content = JSON.stringify(this.state.value.toJSON())
         if( node <= nodeLimit ) {
             localStorage.setItem('content', content)
             alert('Save data local storage')
         } else {
-            alert('Exceed node limit! Node limit is 10')
+            alert('Exceed node limit! Node limit is ' + nodeLimit)
         }
         this.setState({ })
     }
