@@ -8,6 +8,7 @@ export default function NodeCount(options) {
       const { document } = value
       const children = next()
       let wordCount = 0
+      let nodeLimit = 10
       let nodeCount = document._values._tail.array[2].size
 
       for (const [node] of document.blocks({ onlyLeaves: true })) {
@@ -26,7 +27,7 @@ export default function NodeCount(options) {
               display: inline-block;
             `}
           >
-          Word Count: {wordCount} | Node Count: <span id="nodeCount">{nodeCount - 1}</span>
+          Word Count: {wordCount} | Node Count: <span id="nodeCount">{nodeCount - 1}</span> ( limit: <span id="nodeLimit">{nodeLimit}</span> )
           </span>
         </div>
       )

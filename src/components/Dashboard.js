@@ -14,7 +14,6 @@ const isBoldHotkey = isKeyHotkey('mod+b')
 const isItalicHotkey = isKeyHotkey('mod+i')
 const isUnderlinedHotkey = isKeyHotkey('mod+u')
 const isCodeHotkey = isKeyHotkey('mod+`')
-const nodeRange = 10
 const plugins = [
     NodeCount()
 ]
@@ -44,6 +43,8 @@ class Dashboard extends Component {
         value: InitialValue,
         file: null
     }
+
+    
 
     hasMark = (type) => {
         const { value } = this.state
@@ -207,8 +208,9 @@ class Dashboard extends Component {
 
     saveDataLocalStorage = ({ value }) => {
         const node = document.getElementById('nodeCount').innerText
+        const nodeLimit = document.getElementById('nodeLimit').innerText
         const content = JSON.stringify(this.state.value.toJSON())
-        if( node <= nodeRange ) {
+        if( node <= nodeLimit ) {
             localStorage.setItem('content', content)
             alert('Save data local storage')
         } else {
