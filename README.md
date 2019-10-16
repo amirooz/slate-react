@@ -28,6 +28,9 @@ $ yarn start
 ```
 ### Windows - NPM
 ```
+$ remove yarn.lock
+```
+```
 $ npm install
 ```
 ```
