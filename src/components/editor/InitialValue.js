@@ -125,7 +125,7 @@ const initialValue = Value.fromJSON({
         type: "file",
         data: {
           "src":
-            "http://www.africau.edu/images/default/sample.pdf"
+            "https://www.ets.org/Media/Tests/GRE/pdf/gre_research_validity_data.pdf"
         }
       }
     ]
