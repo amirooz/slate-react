@@ -10,6 +10,7 @@ const Navbar = (props) => {
                     <ul className="right">
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/list">List</NavLink></li>
+                        <li><NavLink to="/pdf">PDF</NavLink></li>
                     </ul>
                 </div>
             </nav>

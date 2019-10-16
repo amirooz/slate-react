@@ -8,6 +8,7 @@ import { css } from 'emotion'
 import { isKeyHotkey } from 'is-hotkey'
 import { Button, Icon, Toolbar } from './editor/Components'
 import NodeCount from './editor/NodeCount'
+import {PDFtoIMG} from 'react-pdf-to-image'
 
 const DEFAULT_NODE = 'paragraph'
 const isBoldHotkey = isKeyHotkey('mod+b')
@@ -167,17 +168,14 @@ class Dashboard extends Component {
             case 'file': {
                 const src = node.data.get('src')
                 return (
-                    <img
-                    {...attributes}
-                    src={src}
-                    alt={src}
-                    className={css`
-                        display: block;
-                        max-width: 100%;
-                        max-height: 20em;
-                        box-shadow: ${this.isFocused ? '0 0 0 2px blue;' : 'none'};
-                    `}
-                    />
+                    <PDFtoIMG file={src}>
+                        {({pages}) => {
+                            if (!pages.length) return 'Loading...';
+                            return pages.map((page, index)=>
+                                <img key={index} src={page} alt={page} />
+                            );
+                        }}
+                    </PDFtoIMG>
                 )
             }
             default:

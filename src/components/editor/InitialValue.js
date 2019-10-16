@@ -122,7 +122,7 @@ const initialValue = Value.fromJSON({
       },
       {
         object: "block",
-        type: "image",
+        type: "file",
         data: {
           "src":
             "http://www.africau.edu/images/default/sample.pdf"

@@ -5,11 +5,13 @@
   "description": "A customize rich text editor in a Slate JS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/amirphp7/slate-react.git"
+    "url": "https://github.com/amirphp7/slate-react.git",
+    "demo": "https://twisker-slate.herokuapp.com"
   },
   "author": {
     "name": "MD. Amir Hossain",
-    "email": "amirhossain0606@gmail.com"
+    "email": "amirhossain0606@gmail.com",
+    "skype": "amir007h"
   },
   "license": "MIT",
   "dependencies": {
@@ -43,6 +45,7 @@
     "is-url": "^1.2.4",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-pdf-to-image": "^1.0.2",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
